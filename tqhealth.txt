@@ -22,7 +22,7 @@
         <div style="clear:both;"></div>
         <?php echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/bulktqhost") ); ?>
         <?php
-        echo $this->Form->input('bulktqhost', array("label" => false, "type" => "textarea", "rows" => 20, "cols"=>"75")); 
+        echo $this->Form->input('bulktqhostsearch', array("label" => false, "type" => "textarea", "rows" => 20, "cols"=>"75")); 
         echo "<br/>";
         echo $this->Form->input('button', array('type'=>'image', "src"=>"/images/btn_submit.png", 'label'=> false));
         echo $this->Form->end() ; ?>
@@ -78,7 +78,7 @@ foreach($searchTablesArray as $tableName) { ?>
             
         <table class="tbl_border_gry" border="0" width="100%" cellpadding="1" cellspacing="0" align="left">
             <tr>
-            <?php debug($results);?>
+            <?php // debug($results);?>
                 <?php foreach($results[$tableName][0][$tableName] as $fieldNames => $values){ ?> 
                     <?php if($fieldNames == "Location"){ ?>
                         <th style="width:100px;"><?php echo ($fieldNames); ?></th>
@@ -90,17 +90,21 @@ foreach($searchTablesArray as $tableName) { ?>
                         <th><?php echo ($fieldNames); ?></th>   
                     <?php } ?>
                 <?php } ?>
+                <?php foreach($results[$tableName][0][0] as $fieldNames => $values){ ?> 
+				<?php if($fieldNames == "Location"){ ?>
+						<th style="width:100px;"><?php echo ($fieldNames); ?></th>
+						<?php }else{ ?>
+								<th><?php echo ($fieldNames); ?></th>   
+						<?php } ?>
+				<?php } ?>
             </tr>
             <?php foreach($results[$tableName] as $result){ ?>
                 <tr>
                     <?php foreach($result[$tableName] as $values){ ?>
-	                    <?php if(isset($values[0]) && is_array($values[0])){ ?>
-							<?php foreach($values[0] as $innerFieldNames => $innerFieldvalues){  ?>       
-	                    		<th><?php echo ($innerFieldNames); ?></th>
-	                    	<?php } ?> 
-	                    <?php }else{ ?> 
 	                    	<td><?php echo ($values); ?></td>
-	                   	<?php } ?>   
+                    <?php } ?>
+                    <?php foreach($result[0] as $values){ ?>
+	                    	<td><?php echo ($values); ?></td>
                     <?php } ?>
                 </tr>
             <?php } ?>
