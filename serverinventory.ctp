@@ -5,7 +5,8 @@
 ?>
 
 <div class="content-center-div">
-    
+
+<?php if(0){ ?>    
 <div class="search-fields-div-double">
         <?php echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/cbd") ); ?>
         <div class="search-fields-div-single-label-short">Asset Search :</div>
@@ -16,7 +17,19 @@
         <div class="clear"></div>
         <div class="bulksearch-link-double"><a href="/reports/<?php echo $fromTable; ?>/<?php echo $this->request->params['action'];?>/bulkcbd" class="bulksearch-link">Bulk Assets Search</a></div>
 </div>
+<?php } ?>     
+      
+   
+<div class="search-fields-div-double">
+        <?php echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/ipsearch") ); ?>
+        <div class="search-fields-div-single-label-short">IP Address Search :</div>
+        <div class="clear"></div>
+        <div class="search-fields-div-double-textbox"><?php echo $this->Form->input('ipsearch', array("label" => false)); ?></div>
         
+        <?php echo $this->Form->end() ; ?>
+        <div class="clear"></div>
+        <div class="bulksearch-link-double"><a href="/reports/<?php echo $fromTable; ?>/<?php echo $this->request->params['action'];?>/bulkipsearch" class="bulksearch-link">Bulk IP Address Search</a></div>
+</div>
 <?php if(isset($this->request->params['pass'][0]) && !in_array($this->request->params['pass'][0], array("nasusers", "nasgroups") )) { ?> 
 <div class="search-fields-div-double">
         <?php echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/host") ); ?> 
@@ -60,7 +73,7 @@
         <div class="search-fields-div-double">
         <?php 
         echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/app") ); ?>
-        <div class="search-fields-div-single-label-short <?php if($this->request->params['action'] != 'serverinventory') {?>red-text<?php } ?>">App Search :</div>
+        <div class="search-fields-div-single-label-short <?php if($this->request->params['action'] != 'serverinventory') {?>red-text<?php } ?>">SYS-ID App Search :</div>
         <div class="clear"></div> 
         <div class="search-fields-div-double-textbox">
         <?php 
@@ -73,7 +86,7 @@
             echo $this->Form->end() ;
         ?></div>
         <div class="clear"></div><!-- /reports/<?php echo $fromTable; ?>/<?php echo $this->request->params['action'];?>/bulkapp -->
-        <div class="bulksearch-link-double"><a href="#" class="bulksearch-link <?php if($this->request->params['action'] != 'serverinventory') {?> red-text<?php } ?>">Bulk Apps Search</a></div>
+        <div class="bulksearch-link-double"><a href="#" class="bulksearch-link <?php if($this->request->params['action'] != 'serverinventory') {?> red-text<?php } ?>">Bulk SYS-ID Apps Search</a></div>
         </div>
     <?php } ?> 
     <?php if(0){ // Hiding the Business Unit search?>
@@ -160,6 +173,16 @@
         echo $this->Form->end() ;
         ?>
 <?php } ?>
+<?php if($reportType == "ipsearch"){
+        echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/ipsearch") ); ?>
+        <div style="float:left;">IP Address Search :</div>
+        <?php 
+        echo $this->Form->input('ipsearchsearch', array("label" => false, "type" => "textarea", "rows" => 20, "cols"=>"75")); 
+        echo "<br>";
+        echo $this->Form->input('button', array('type'=>'image', "src"=>"/images/btn_submit.png", 'label'=> false));
+        echo $this->Form->end() ;
+        ?>
+<?php } ?>
 <?php if($reportType == "bulkhost"){
         echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/bulkhost") ); ?>
         <div style="float:left;">Bulk Servers Search :</div>
@@ -172,7 +195,7 @@
 <?php } ?>
 <?php if($reportType == "bulkapp"){
         echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/bulkapp") ); ?>
-        <div style="float:left;">Bulk Apps Search :</div>
+        <div style="float:left;">Bulk SYS-ID Apps Search :</div>
         <?php
         echo $this->Form->input('bulkappsearch', array("label" => false, "type" => "textarea", "rows" => 20, "cols"=>"75")); 
         echo "<br/>";
