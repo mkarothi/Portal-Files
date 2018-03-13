@@ -145,6 +145,9 @@
                 <a href="/reports/global/serverinventory" <?php if(isset($this->request->params['pass'][0]) && $this->request->params['pass'][0] == "global") {?>class = "sidebar-selected" <?php } ?> >Global Server Search</a>
             </li>
             <li>
+                <a href="/reports/tadam/serverinventory" <?php if(isset($this->request->params['pass'][0]) && $this->request->params['pass'][0] == "tadam") {?>class = "sidebar-selected" <?php } ?> >TADAM Search</a>
+            </li>
+            <li>
                 <a href="/reports/CMDB/serverinventory" <?php if(isset($this->request->params['pass'][0]) && $this->request->params['pass'][0] == "CMDB") {?>class = "sidebar-selected" <?php } ?> >CMDB Server Search</a>
             </li>
             <li>
