@@ -330,7 +330,7 @@ class ReportsController extends AppController {
                 }elseif($reportType == "app" && in_array($searchName, array('serverinventory', 'cmdbinventory', 'drexercise')) ){
                     if((isset($this->data["Reports"]["appsearch"]) && $this->data["Reports"]["appsearch"])){
                         $searchString = $this->data["Reports"]["appsearch"];
-                        if($this->$tableName->hasField('Server_Name')){
+                        if($this->$tableName->hasField('APP_NAME')){
                             if($searchName != 'drexercise' && $fromTable != "tadam"){
                                 $options = array("conditions" => array("CmdbAppData.Application_Name like " => "%$searchString%"));
                             }else{
@@ -358,7 +358,7 @@ class ReportsController extends AppController {
                                 unset($searchArray[$key]);
                             }
                         }
-                        if($this->$tableName->hasField('Server_Name')){
+                        if($this->$tableName->hasField('APP_NAME')){
                             if($searchName != 'drexercise' && $fromTable != "tadam"){
                                 $options = array("conditions"  => array("CmdbAppData.Application_Name" => $searchArray));
                             }else{
