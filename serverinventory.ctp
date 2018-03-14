@@ -173,11 +173,11 @@
         echo $this->Form->end() ;
         ?>
 <?php } ?>
-<?php if($reportType == "ipsearch"){
-        echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/ipsearch") ); ?>
+<?php if($reportType == "bulkipsearch"){
+        echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/bulkipsearch") ); ?>
         <div style="float:left;">IP Address Search :</div>
         <?php 
-        echo $this->Form->input('ipsearchsearch', array("label" => false, "type" => "textarea", "rows" => 20, "cols"=>"75")); 
+        echo $this->Form->input('bulkipsearch', array("label" => false, "type" => "textarea", "rows" => 20, "cols"=>"75")); 
         echo "<br>";
         echo $this->Form->input('button', array('type'=>'image', "src"=>"/images/btn_submit.png", 'label'=> false));
         echo $this->Form->end() ;
@@ -404,4 +404,3 @@
     
 </script>    
 <?php } ?>
-
