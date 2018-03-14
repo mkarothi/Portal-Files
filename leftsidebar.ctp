@@ -148,10 +148,10 @@
                 <a href="/reports/tadam/serverinventory" <?php if(isset($this->request->params['pass'][0]) && $this->request->params['pass'][0] == "tadam") {?>class = "sidebar-selected" <?php } ?> >TADAM Search</a>
             </li>
             <li>
-                <a href="/reports/CMDB/serverinventory" <?php if(isset($this->request->params['pass'][0]) && $this->request->params['pass'][0] == "CMDB") {?>class = "sidebar-selected" <?php } ?> >CMDB Server Search</a>
+                <a href="/reports/CMDB/serverinventory" <?php if(isset($this->request->params['pass'][0]) && $this->request->params['pass'][0] == "CMDB") {?>class = "sidebar-selected" <?php } ?> >SNOW Server Search</a>
             </li>
             <li>
-                <a href="/reports/RVTools/serverinventory" <?php if(isset($this->request->params['pass'][0]) && $this->request->params['pass'][0] == "RVTools") {?>class = "sidebar-selected" <?php } ?> >RVTools Server Search</a>
+                <a href="/reports/RVTools/serverinventory" <?php if(isset($this->request->params['pass'][0]) && $this->request->params['pass'][0] == "RVTools") {?>class = "sidebar-selected" <?php } ?> >vCenter Server Search</a>
             </li>
 
             <li>
@@ -200,7 +200,7 @@
                 <a href="/reports/global/cmdbinventory" <?php if(isset($this->request->params['pass'][0]) && $this->request->params['pass'][0] == "global") {?>class = "sidebar-selected" <?php } ?> >Global Billing Search</a>
             </li>
             <li>
-                <a href="/reports/CMDB/cmdbinventory" <?php if(isset($this->request->params['pass'][0]) && $this->request->params['pass'][0] == "CMDB") {?>class = "sidebar-selected" <?php } ?> >CMDB Server Search</a>
+                <a href="/reports/CMDB/cmdbinventory" <?php if(isset($this->request->params['pass'][0]) && $this->request->params['pass'][0] == "CMDB") {?>class = "sidebar-selected" <?php } ?> >SNOW Server Search</a>
             </li>
         </ul>
     </div>
@@ -238,3 +238,4 @@
     </div>
 </div>
 <?php } ?>
+
