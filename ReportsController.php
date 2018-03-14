@@ -285,47 +285,13 @@ class ReportsController extends AppController {
                             $results[$tableName] =  $this->$tableName->find("all", $options);
                         }
                     }
-				} elseif($reportType == "host" && $fromTable == "tadam" ){
-                	
+                } elseif($reportType == "host"){
                     if(isset($this->data) && !empty($this->data) || $searchString){
                         if((isset($this->data["Reports"]["hostsearch"]) && $this->data["Reports"]["hostsearch"]) || $searchString){
                             $searchString = $this->data["Reports"]["hostsearch"];
                             if($this->$tableName->hasField('Server_Name')){
                                 $options = array("conditions" => array($tableName.".Server_Name like " => "%$searchString%"));
-                                if(!isset($this->data["Reports"]["export"])){
-                                    $options['limit'] = 100;
-                                }
-                                $results[$tableName] =  $this->$tableName->find("all", $options);
-                            }
-                        }
-                    }
-                }elseif($reportType == "bulkhost" && $fromTable == "tadam"){
-                    if((isset($this->data["Reports"]["bulkhostsearch"]) && $this->data["Reports"]["bulkhostsearch"])){
-                        $searchArray = array();
-                        $searchString = trim($this->data["Reports"]["bulkhostsearch"]);
-                        $searchArray = explode("\n", $this->data["Reports"]["bulkhostsearch"]);
-                        foreach($searchArray as $key => $value) {
-                            $searchArray[$key] = trim($value);
-                            if(!$searchArray[$key]){
-                                unset($searchArray[$key]);
-                            }
-                        }
-                        if($this->$tableName->hasField('Server_Name')){
-                            $options = array("conditions" => array($tableName.".Server_Name" => $searchArray));
-                            if(!isset($this->data["Reports"]["export"])){
-                                $options['limit'] = 100;
-                            }
-                            $results[$tableName] =  $this->$tableName->find("all", $options);
-                        }
-                    }
-                } elseif($reportType == "host"  ){
-                	
-                    if(isset($this->data) && !empty($this->data) || $searchString){
-                        if((isset($this->data["Reports"]["hostsearch"]) && $this->data["Reports"]["hostsearch"]) || $searchString){
-                            $searchString = $this->data["Reports"]["hostsearch"];
-                            if($this->$tableName->hasField('Server_Name')){
-                                $options = array("conditions" => array($tableName.".Server_Name like " => "%$searchString%"));
-                                if(in_array($searchName, array('serverinventory', 'cmdbinventory')) ){
+                                if(in_array($searchName, array('serverinventory', 'cmdbinventory')) && $fromTable != "tadam"){
                                     $this->$tableName->bindModel(array('hasOne' => array('CmdbAppData' => array('className' => 'CmdbAppData',
                                                                                           'conditions' => array("CmdbAppData.Server_Name = ".$tableName.".Server_Name"),
                                                                                           'foreignKey' => false))), false);
@@ -350,7 +316,7 @@ class ReportsController extends AppController {
                         }
                         if($this->$tableName->hasField('Server_Name')){
                             $options = array("conditions" => array($tableName.".Server_Name" => $searchArray));
-                            if(in_array($searchName, array('serverinventory', 'cmdbinventory')) ){
+                            if(in_array($searchName, array('serverinventory', 'cmdbinventory')) && $fromTable != "tadam"){
                                     $this->$tableName->bindModel(array('hasOne' => array('CmdbAppData' => array('className' => 'CmdbAppData',
                                                                                           'conditions' => array("CmdbAppData.Server_Name = ".$tableName.".Server_Name"),
                                                                                           'foreignKey' => false))), false);
@@ -365,13 +331,13 @@ class ReportsController extends AppController {
                     if((isset($this->data["Reports"]["appsearch"]) && $this->data["Reports"]["appsearch"])){
                         $searchString = $this->data["Reports"]["appsearch"];
                         if($this->$tableName->hasField('Server_Name')){
-                            if($searchName != 'drexercise'){
+                            if($searchName != 'drexercise' && $fromTable != "tadam"){
                                 $options = array("conditions" => array("CmdbAppData.Application_Name like " => "%$searchString%"));
                             }
                             if(!isset($this->data["Reports"]["export"])){
                                 $options['limit'] = 100;
                             }
-                            if($searchName != 'drexercise'){
+                            if($searchName != 'drexercise' && $fromTable != "tadam"){
         							$this->$tableName->bindModel(array('hasOne' => array('CmdbAppData' => array('className' => 'CmdbAppData',
                                                                                                       'conditions' => array("CmdbAppData.Server_Name = ".$tableName.".Server_Name"),
                                                                                                       'foreignKey' => false))), false);
@@ -391,13 +357,13 @@ class ReportsController extends AppController {
                             }
                         }
                         if($this->$tableName->hasField('Server_Name')){
-                            if($searchName != 'drexercise'){
+                            if($searchName != 'drexercise' && $fromTable != "tadam"){
                                 $options = array("conditions"  => array("CmdbAppData.Application_Name" => $searchArray));
                             }
                             if(!isset($this->data["Reports"]["export"])){
                                 $options['limit'] = 100;
                             }
-                            if($searchName != 'drexercise'){
+                            if($searchName != 'drexercise' && $fromTable != "tadam"){
     							$this->$tableName->bindModel(array('hasOne' => array('CmdbAppData' => array('className' => 'CmdbAppData',
     			                                                                                            'conditions' => array("CmdbAppData.Server_Name = ".$tableName.".Server_Name"),
     			                                                                                            'foreignKey' => false))), false);
