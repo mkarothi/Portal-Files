@@ -73,7 +73,7 @@
         <div class="search-fields-div-double">
         <?php 
         echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/app") ); ?>
-        <div class="search-fields-div-single-label-short <?php if($this->request->params['action'] != 'serverinventory') {?>red-text<?php } ?>">SYS-ID App Search :</div>
+        <div class="search-fields-div-single-label-short <?php if($this->request->params['action'] != 'serverinventory') {?>red-text<?php } ?>">SYS-ID / App Search :</div>
         <div class="clear"></div> 
         <div class="search-fields-div-double-textbox">
         <?php 
@@ -86,7 +86,7 @@
             echo $this->Form->end() ;
         ?></div>
         <div class="clear"></div><!-- /reports/<?php echo $fromTable; ?>/<?php echo $this->request->params['action'];?>/bulkapp -->
-        <div class="bulksearch-link-double"><a href="#" class="bulksearch-link <?php if($this->request->params['action'] != 'serverinventory') {?> red-text<?php } ?>">Bulk SYS-ID Apps Search</a></div>
+        <div class="bulksearch-link-double"><a href="#" class="bulksearch-link <?php if($this->request->params['action'] != 'serverinventory') {?> red-text<?php } ?>">Bulk SYS-ID / Apps Search</a></div>
         </div>
     <?php } ?> 
     <?php if(0){ // Hiding the Business Unit search?>
@@ -195,7 +195,7 @@
 <?php } ?>
 <?php if($reportType == "bulkapp"){
         echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/bulkapp") ); ?>
-        <div style="float:left;">Bulk SYS-ID Apps Search :</div>
+        <div style="float:left;">Bulk SYS-ID / Apps Search :</div>
         <?php
         echo $this->Form->input('bulkappsearch', array("label" => false, "type" => "textarea", "rows" => 20, "cols"=>"75")); 
         echo "<br/>";
@@ -346,7 +346,7 @@
                                }
                                
                                ?>
-                    		<td><?php if(isset($this->request->params['action']) && !in_array($this->request->params['action'], array("drexercise") ) ) { ?>
+                    		<td><?php if(0 && isset($this->request->params['action']) && !in_array($this->request->params['action'], array("drexercise") ) ) { ?>
                     		    <a class="serverdetails" href="/reports/<?php echo ($values); ?>/getserverdetails/<?php echo $urlString ;?>"><?php echo strtoupper($values); ?></a>
                     		    <?php } else {?>
                     		        <?php echo strtoupper($values); ?>
@@ -404,3 +404,4 @@
     
 </script>    
 <?php } ?>
+
