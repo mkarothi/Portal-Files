@@ -333,6 +333,8 @@ class ReportsController extends AppController {
                         if($this->$tableName->hasField('Server_Name')){
                             if($searchName != 'drexercise' && $fromTable != "tadam"){
                                 $options = array("conditions" => array("CmdbAppData.Application_Name like " => "%$searchString%"));
+                            }else{
+                            	$options = array("conditions"  => array($tableName.".APP_NAME" => $searchArray));
                             }
                             if(!isset($this->data["Reports"]["export"])){
                                 $options['limit'] = 100;
@@ -359,6 +361,8 @@ class ReportsController extends AppController {
                         if($this->$tableName->hasField('Server_Name')){
                             if($searchName != 'drexercise' && $fromTable != "tadam"){
                                 $options = array("conditions"  => array("CmdbAppData.Application_Name" => $searchArray));
+                            }else{
+                            	$options = array("conditions"  => array($tableName.".APP_NAME" => $searchArray));
                             }
                             if(!isset($this->data["Reports"]["export"])){
                                 $options['limit'] = 100;
