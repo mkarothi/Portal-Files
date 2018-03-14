@@ -285,7 +285,41 @@ class ReportsController extends AppController {
                             $results[$tableName] =  $this->$tableName->find("all", $options);
                         }
                     }
-                } elseif($reportType == "host"){
+				} elseif($reportType == "host" && $fromTable == "tadam" ){
+                	
+                    if(isset($this->data) && !empty($this->data) || $searchString){
+                        if((isset($this->data["Reports"]["hostsearch"]) && $this->data["Reports"]["hostsearch"]) || $searchString){
+                            $searchString = $this->data["Reports"]["hostsearch"];
+                            if($this->$tableName->hasField('Server_Name')){
+                                $options = array("conditions" => array($tableName.".Server_Name like " => "%$searchString%"));
+                                if(!isset($this->data["Reports"]["export"])){
+                                    $options['limit'] = 100;
+                                }
+                                $results[$tableName] =  $this->$tableName->find("all", $options);
+                            }
+                        }
+                    }
+                }elseif($reportType == "bulkhost" && $fromTable == "tadam"){
+                    if((isset($this->data["Reports"]["bulkhostsearch"]) && $this->data["Reports"]["bulkhostsearch"])){
+                        $searchArray = array();
+                        $searchString = trim($this->data["Reports"]["bulkhostsearch"]);
+                        $searchArray = explode("\n", $this->data["Reports"]["bulkhostsearch"]);
+                        foreach($searchArray as $key => $value) {
+                            $searchArray[$key] = trim($value);
+                            if(!$searchArray[$key]){
+                                unset($searchArray[$key]);
+                            }
+                        }
+                        if($this->$tableName->hasField('Server_Name')){
+                            $options = array("conditions" => array($tableName.".Server_Name" => $searchArray));
+                            if(!isset($this->data["Reports"]["export"])){
+                                $options['limit'] = 100;
+                            }
+                            $results[$tableName] =  $this->$tableName->find("all", $options);
+                        }
+                    }
+                } elseif($reportType == "host"  ){
+                	
                     if(isset($this->data) && !empty($this->data) || $searchString){
                         if((isset($this->data["Reports"]["hostsearch"]) && $this->data["Reports"]["hostsearch"]) || $searchString){
                             $searchString = $this->data["Reports"]["hostsearch"];
@@ -1393,5 +1427,8 @@ class ReportsController extends AppController {
     function storagecalculator($calculate = ""){
         
     }
+
+
 }
+
 ?>
