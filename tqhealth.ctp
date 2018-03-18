@@ -12,7 +12,6 @@
 </div>
 
 
-
 <?php if(!$fromSearch){ //debug($reportType);?>
 
     <?php if($reportType == "bulktqhost"){ ?>
@@ -41,7 +40,7 @@
 </div>
 <?php } ?>
 
-</div>
+
 
 <div class="main">
 <?php $iterator = 1;?>
@@ -115,6 +114,7 @@ foreach($searchTablesArray as $tableName) { ?>
 <?php 
 $iterator++;
 } ?>
+  </div>
 </div>
 <script>
     $( document ).ready(function() { 
