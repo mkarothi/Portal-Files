@@ -78,13 +78,12 @@ foreach($searchTablesArray as $tableName) { ?>
             
         <table class="tbl_border_gry" border="0" width="100%" cellpadding="1" cellspacing="0" align="left">
             <tr>
-            <?php // debug($results);?>
                 <?php foreach($results[$tableName][0][$tableName] as $fieldNames => $values){ ?> 
                     <?php if($fieldNames == "Location"){ ?>
                         <th style="width:100px;"><?php echo ($fieldNames); ?></th>
                     <?php }elseif(isset($fieldNames[0]) && is_array($fieldNames[0])){ ?>
    							<?php foreach($fieldNames[0] as $innerFieldNames => $innerFieldvalues){  ?>       
-	                    	<th><?php echo ($innerFieldNames); ?></th>
+	                    	<th><?php echo ($innerFieldNames); ?> </th>
 	                    	<?php } ?>
                     <?php }else{ ?>
                         <th><?php echo ($fieldNames); ?></th>   
@@ -92,7 +91,7 @@ foreach($searchTablesArray as $tableName) { ?>
                 <?php } ?>
                 <?php foreach($results[$tableName][0][0] as $fieldNames => $values){ ?> 
 				<?php if($fieldNames == "Location"){ ?>
-						<th style="width:100px;"><?php echo ($fieldNames); ?></th>
+						<th style="width:100px;"><?php echo ($fieldNames); ?> </th>
 						<?php }else{ ?>
 								<th><?php echo ($fieldNames); ?></th>   
 						<?php } ?>
@@ -116,7 +115,6 @@ foreach($searchTablesArray as $tableName) { ?>
 <?php 
 $iterator++;
 } ?>
-    </div>
 </div>
 <script>
     $( document ).ready(function() { 
@@ -145,6 +143,4 @@ $iterator++;
 </script>    
     
 <?php } ?>
-
 </div>
-
