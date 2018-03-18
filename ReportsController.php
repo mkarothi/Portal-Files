@@ -7,7 +7,7 @@ class ReportsController extends AppController {
     
     function beforeFilter() {
         parent::beforeFilter();
-        Configure::write('debug', 2);
+        Configure::write('debug', 0);
         ini_set('memory_limit', '3092M');
         $this->layout = "report";
     }
@@ -334,7 +334,7 @@ class ReportsController extends AppController {
                             if($searchName != 'drexercise' && $fromTable != "tadam"){
                                 $options = array("conditions" => array("CmdbAppData.Application_Name like " => "%$searchString%"));
                             }else{
-                            	$options = array("conditions"  => array($tableName.".APP_NAME" => $searchArray));
+                            	$options = array("conditions"  => array($tableName.".APP_NAME" => $searchString));
                             }
                             if(!isset($this->data["Reports"]["export"])){
                                 $options['limit'] = 100;
@@ -876,8 +876,11 @@ class ReportsController extends AppController {
                     }
                     $rows[] = $rowValues;
                 }
+				
                 $exportArray = $rows;
-                $filename = $tableName."_" .$reportType."_".date("Y-m-d-H-i-s") .".xls";
+				#debug($exportArray);
+				#exit(0);
+                $filename = $tableName."_" .$reportType."_".date("Y-m-d-H-i-s") .".csv";
                 $this->exportresults($exportArray, $filename);
             }
         }
@@ -1402,3 +1405,4 @@ class ReportsController extends AppController {
 }
 
 ?>
+
