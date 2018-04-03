@@ -85,8 +85,8 @@
             echo $this->Form->input('appsearch', $options); 
             echo $this->Form->end() ;
         ?></div>
-        <div class="clear"></div><!-- /reports/<?php echo $fromTable; ?>/<?php echo $this->request->params['action'];?>/bulkapp -->
-        <div class="bulksearch-link-double"><a href="#" class="bulksearch-link <?php if($this->request->params['action'] != 'serverinventory') {?> red-text<?php } ?>">Bulk SYS-ID / Apps Search</a></div>
+        <div class="clear"></div>
+        <div class="bulksearch-link-double"><a href="/reports/<?php echo $fromTable; ?>/<?php echo $this->request->params['action'];?>/bulkapp" class="bulksearch-link <?php if($this->request->params['action'] != 'serverinventory') {?> red-text<?php } ?>">Bulk SYS-ID / Apps Search</a></div>
         </div>
     <?php } ?> 
     <?php if(0){ // Hiding the Business Unit search?>
@@ -404,3 +404,4 @@
     
 </script>    
 <?php } ?>
+
