@@ -7,7 +7,7 @@ class ReportsController extends AppController {
     
     function beforeFilter() {
         parent::beforeFilter();
-        Configure::write('debug', 0);
+        Configure::write('debug', 2);
         ini_set('memory_limit', '3092M');
         $this->layout = "report";
     }
@@ -94,8 +94,8 @@ class ReportsController extends AppController {
         $this->set("deviceid", $deviceid);
         // debug($this->data);
 		if ($searchName == 'tqhealth'){
-			$searchTablesArray = array("TqHealthcheckData"); 
-			$searchTypes = array("TqHealthcheckData" => "tqhealth");
+			$searchTablesArray = array("TqVmwareHealthcheckData", "TqLinuxHealthcheckData"); 
+			$searchTypes = array("TqLinuxHealthcheckData" => "tqhealth");
 		}elseif($searchName == 'serverinventory'){
             if($fromTable == "global"){
                 $searchTablesArray = array("CmdbServerData", "RvtoolsServerData", "HmcScansServerData", 'TadamSysidComponentsData');
@@ -196,7 +196,7 @@ class ReportsController extends AppController {
                         $searchString = $this->data["Reports"]["tqhost"];
                         if($this->$tableName->hasField('Server_Name')){
                             $options = array("conditions" => array($tableName.".Server_Name like " => "$searchString%"));
-							$options['fields'] = array('System_id', 'Server_Name', "max(epic_time) as 'epic_time'" , "from_unixtime(epic_time) as 'Date'");
+							$options['fields'] = array('System_id', 'Server_Name', "max(epic_time) as 'epic_time'" , "from_unixtime(epic_time) as 'Last TQ Collection Time'", 'Portal_Updated_Date');
                             if(!isset($this->data["Reports"]["export"])){
                                 $options['limit'] = 100;
                             }
@@ -220,7 +220,7 @@ class ReportsController extends AppController {
                             if(!isset($this->data["Reports"]["export"])){
                                 $options['limit'] = 100;
                             }
-							$options['fields'] = array('System_id', 'Server_Name', "max(epic_time) as `epic_time`" , "from_unixtime(epic_time) as `Date`");
+							$options['fields'] = array('System_id', 'Server_Name', "max(epic_time) as `epic_time`" , "from_unixtime(epic_time) as `Last TQ Collection Time`", 'Portal_Updated_Date');
 							$options['group'] = "Server_Name";
                             $results[$tableName] =  $this->$tableName->find("all", $options);
                         }
@@ -876,11 +876,9 @@ class ReportsController extends AppController {
                     }
                     $rows[] = $rowValues;
                 }
-				
                 $exportArray = $rows;
-				#debug($exportArray);
-				#exit(0);
-                $filename = $tableName."_" .$reportType."_".date("Y-m-d-H-i-s") .".csv";
+				debug($exportArray);
+                $filename = $tableName."_" .$reportType."_".date("Y-m-d-H-i-s") .".xls";
                 $this->exportresults($exportArray, $filename);
             }
         }
@@ -1405,4 +1403,3 @@ class ReportsController extends AppController {
 }
 
 ?>
-
