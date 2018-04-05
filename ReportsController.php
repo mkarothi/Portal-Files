@@ -95,7 +95,7 @@ class ReportsController extends AppController {
         // debug($this->data);
 		if ($searchName == 'tqhealth'){
 			$searchTablesArray = array("TqVmwareHealthcheckData", "TqLinuxHealthcheckData"); 
-			$searchTypes = array("TqLinuxHealthcheckData" => "tqhealth");
+			$searchTypes = array("TqLinuxHealthcheckData" => "tqhealth", "TqVmwareHealthcheckData" => 'tqhealth');
 		}elseif($searchName == 'serverinventory'){
             if($fromTable == "global"){
                 $searchTablesArray = array("CmdbServerData", "RvtoolsServerData", "HmcScansServerData", 'TadamSysidComponentsData');
