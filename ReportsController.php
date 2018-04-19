@@ -1399,6 +1399,20 @@ class ReportsController extends AppController {
         
     }
 
+    function paritycheck($serverName = ""){
+
+        if($serverName){
+            $this->__getMatchingServers($serverName);
+        }
+        
+    }
+
+    function __getMatchingServers($serverName){
+        $this->loadModel("MappingTable");
+        $mappingServers = $this->MappingTable->find("all", array("conditions" => array("MappingTable.Source_Server_Name" => $serverName)) );
+        return $mappingServers;
+
+    }
 
 }
 
