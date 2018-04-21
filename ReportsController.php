@@ -1398,22 +1398,46 @@ class ReportsController extends AppController {
     function storagecalculator($calculate = ""){
         
     }
-
-    function paritycheck($serverName = ""){
-
-        if($serverName){
-            $this->__getMatchingServers($serverName);
-        }
-        
+    
+	function paritycheck($sourceServerName = ""){
+		
+		if(!empty($this->data) ) {
+	        if($this->data['Reports']['Server_Name']){
+	        	$sourceServerName = $this->data['Reports']['Server_Name'];
+	            $targetServers = $this->__getMatchingServers($this->data['Reports']['Server_Name']);
+	        }
+			if(isset($this->data['Reports']['target_server']) && $this->data['Reports']['target_server']){
+	            $mappingServers = $this->__compareWithTargetServers($this->data['Reports']['Server_Name'], $this->data['Reports']['target_server']);
+	        }
+		}
+		$this->set('sourceServerName', $sourceServerName);
+		
     }
 
     function __getMatchingServers($serverName){
         $this->loadModel("MappingTable");
         $mappingServers = $this->MappingTable->find("all", array("conditions" => array("MappingTable.Source_Server_Name" => $serverName)) );
-        return $mappingServers;
-
+		foreach($mappingServers as $mappingServer){
+			$targetServers[$mappingServer['MappingTable']['Target_Server_Name']] = $mappingServer['MappingTable']['Target_Server_Env'];
+		}
+		$this->set('targetServers', $targetServers);
+        return $targetServers;
     }
-
+	
+	function __compareWithTargetServers($serverName, $targetServers){
+        $targetServers[] = $serverName;
+		$this->loadModel("TadamSysidComponentsData");
+        $mappingServers = $this->TadamSysidComponentsData->find("all", array("conditions" => array("TadamSysidComponentsData.Server_Name" => $targetServers)) );
+		if($mappingServers){
+			foreach($mappingServers as $key => $mappingServer){
+				$mappingServers[$mappingServer['TadamSysidComponentsData']['Server_Name']] = $mappingServer['TadamSysidComponentsData'];
+				unset($mappingServers[$key]);
+			}
+		}
+		$this->set('selectedServers', $targetServers);
+		$this->set('mappingServers', $mappingServers);
+		return $mappingServers;
+    }
 }
 
 ?>
