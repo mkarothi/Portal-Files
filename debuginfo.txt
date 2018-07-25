@@ -1,33 +1,39 @@
 
+--
+-- Table structure for table `sn_server_parity_datas`
+--
+
+DROP TABLE IF EXISTS `sn_server_parity_datas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sn_server_parity_datas` (
+  `Server_Name` varchar(100) NOT NULL,
+  `App_Names` varchar(100) DEFAULT NULL,
+  `Operating_System` varchar(100) DEFAULT NULL,
+  `OS_Version` varchar(100) DEFAULT NULL,
+  `IPAddress` varchar(100) DEFAULT NULL,
+  `Logical_CPU_Count` varchar(100) DEFAULT NULL,
+  `CPU_Speed` varchar(100) DEFAULT NULL,
+  `Memory_Size_MB` varchar(100) DEFAULT NULL,
+  `Model` varchar(100) DEFAULT NULL,
+  `Manufacturer` varchar(100) DEFAULT NULL,
+  `Power_Rating` int(100) DEFAULT NULL,
+  PRIMARY KEY (`Server_Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+DROP TABLE IF EXISTS `mapping_tables`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mapping_tables` (
+  `Source_Server_Name` varchar(80) DEFAULT NULL,
+  `Source_Server_Env` varchar(20) DEFAULT NULL,
+  `Target_Server_Name` varchar(80) DEFAULT NULL,
+  `Target_Server_Env` varchar(20) DEFAULT NULL,
+  `SYS_ID` varchar(200) DEFAULT NULL,
+  `Server_Function` varchar(200) DEFAULT NULL,
+  `Primary_SW` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
