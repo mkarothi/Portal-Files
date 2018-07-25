@@ -878,7 +878,7 @@ class ReportsController extends AppController {
                 }
                 $exportArray = $rows;
 				debug($exportArray);
-                $filename = $tableName."_" .$reportType."_".date("Y-m-d-H-i-s") .".xls";
+                $filename = $tableName."_" .$reportType."_".date("Y-m-d-H-i-s") .".csv";
                 $this->exportresults($exportArray, $filename);
             }
         }
@@ -956,7 +956,7 @@ class ReportsController extends AppController {
             $exportArray = $rows;
         }
         if($exportArray){
-            $filename = $tableShortName."_".date("Y-m-d-H-i-s") .".xls";
+            $filename = $tableShortName."_".date("Y-m-d-H-i-s") .".csv";
             $this->exportresults($exportArray, $filename);
         }
     }
@@ -1070,7 +1070,7 @@ class ReportsController extends AppController {
                     $rows[] = $rowValues;
                 }
                 $exportArray = $rows;
-                $filename = "DnslookupPingStat_".date("Y-m-d-H-i-s") .".xls";
+                $filename = "DnslookupPingStat_".date("Y-m-d-H-i-s") .".csv";
                 $this->exportresults($exportArray, $filename);
         }
         
@@ -1245,7 +1245,7 @@ class ReportsController extends AppController {
     
     // Redirect output to a client’s web browser (Excel2007)
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment;filename="01simple.xlsx"');
+    header('Content-Disposition: attachment;filename="01simple.csvx"');
     header('Cache-Control: max-age=0');
     // If you're serving to IE 9, then the following may be needed
     header('Cache-Control: max-age=1');
@@ -1329,7 +1329,7 @@ class ReportsController extends AppController {
                     $rows[] = $rowValues;
                 }
                 $exportArray = $rows;
-                $filename = 'StorageCapacityData'."_" .date("Y-m-d-H-i-s") .".xls";
+                $filename = 'StorageCapacityData'."_" .date("Y-m-d-H-i-s") .".csv";
                 $this->exportresults($exportArray, $filename);
             }
              
