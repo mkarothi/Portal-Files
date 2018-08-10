@@ -3,25 +3,56 @@
 
 
 <div class="search-fields-div-single">
-    <?php echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/tqhost") ); ?>
+    <?php echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/storagehost") ); ?>
     <div class="search-fields-div-single-label-short">Host Name:</div>
-    <div class="search-fields-div-single-textbox"><?php echo $this->Form->input('tqhost', array("label" => false, "div" => false)); ?></div>
+    <div class="search-fields-div-single-textbox"><?php echo $this->Form->input('storagehost', array("label" => false, "div" => false)); ?></div>
     <div class="clear"></div>
-    <div class="bulksearch-link"><a href="/reports/<?php echo $fromTable; ?>/<?php echo $this->request->params['action'];?>/bulktqhost" class="bulksearch-link">Bulk TQ Hosts Search</a></div>
+    <div class="bulksearch-link"><a href="/reports/<?php echo $fromTable; ?>/<?php echo $this->request->params['action'];?>/bulkstoragehost" class="bulksearch-link">Bulk TQ Hosts Search</a></div>
     <?php echo $this->Form->end() ;?>
 </div>
 
+</div>
 
 <?php if(!$fromSearch){ //debug($reportType);?>
 
-    <?php if($reportType == "bulktqhost"){ ?>
+    <?php if($reportType == "bulkframe"){ ?>
+    <div style="clear:both;"></div>
+    <div class="bulk-results">
+        <?php echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/bulkframe") ); ?>
+            <div style="float:left;"><h3>Bulk Storage Frames Search :</h3></div>
+            <div style="clear:both;"></div>
+            <div style="float:left;">Storage Frame Name :
+            <?php echo $this->Form->select('framename', $frameNamesArray, array("label" => false)); ?></div>
+            <div style="clear:both;"></div>
+            <br/>
+            <div style="float:left;">
+            <?php 
+            echo $this->Form->input('bulkdeviceid', array("label" => false, "type" => "textarea", "rows" => 20, "cols"=>"75")); 
+            echo "<br>";
+            echo $this->Form->input('button', array('type'=>'image', "src"=>"/images/btn_submit.png", 'label'=> false));
+            echo $this->Form->end() ;
+            ?></div>
+    </div>
+    <?php }elseif($reportType == "bulkstoragehost"){ ?>
     <div style="clear:both;"></div>
     <div class="bulk-results">
         <div style="float:left;"><h3>Bulk Storage Hosts Search :</h3></div>
         <div style="clear:both;"></div>
-        <?php echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/bulktqhost") ); ?>
+        <?php echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/bulkstoragehost") ); ?>
         <?php
-        echo $this->Form->input('bulktqhostsearch', array("label" => false, "type" => "textarea", "rows" => 20, "cols"=>"75")); 
+        echo $this->Form->input('storagehost', array("label" => false, "type" => "textarea", "rows" => 20, "cols"=>"75")); 
+        echo "<br/>";
+        echo $this->Form->input('button', array('type'=>'image', "src"=>"/images/btn_submit.png", 'label'=> false));
+        echo $this->Form->end() ; ?>
+    </div>
+    <?php }elseif($reportType == "bulkwwn"){ ?>
+    <div style="clear:both;"></div>
+    <div class="bulk-results">
+        <div style="float:left;"><h3>Bulk WWNs Search : </h3></div>
+        <div style="clear:both;"></div>
+        <?php echo $this->Form->create("Reports", array("method" => "POST", "action" => "/$fromTable/". $this->request->params['action'] ."/bulkwwn") ); ?>
+        <?php
+        echo $this->Form->input('wwn', array("label" => false, "type" => "textarea", "rows" => 20, "cols"=>"75")); 
         echo "<br/>";
         echo $this->Form->input('button', array('type'=>'image', "src"=>"/images/btn_submit.png", 'label'=> false));
         echo $this->Form->end() ; ?>
@@ -39,8 +70,6 @@
      </ul>
 </div>
 <?php } ?>
-
-
 
 <div class="main">
 <?php $iterator = 1;?>
@@ -62,8 +91,8 @@ foreach($searchTablesArray as $tableName) { ?>
             }elseif(in_array($reportType, array("frame"))){
                 echo $this->Form->hidden('framename', array("value" => $framename));
                 echo $this->Form->hidden('deviceid', array("value" => $searchString)); 
-            }elseif(in_array($reportType, array("bulktqhost", "tqhost"))){
-                echo $this->Form->hidden('tqhost', array("value" => $searchString));
+            }elseif(in_array($reportType, array("bulkstoragehost", "storagehost"))){
+                echo $this->Form->hidden('storagehost', array("value" => $searchString));
             }elseif(in_array($reportType, array("bulkwwn", "wwn"))){
                 echo $this->Form->hidden('wwn', array("value" => $searchString));
             }
@@ -80,29 +109,15 @@ foreach($searchTablesArray as $tableName) { ?>
                 <?php foreach($results[$tableName][0][$tableName] as $fieldNames => $values){ ?> 
                     <?php if($fieldNames == "Location"){ ?>
                         <th style="width:100px;"><?php echo ($fieldNames); ?></th>
-                    <?php }elseif(isset($fieldNames[0]) && is_array($fieldNames[0])){ ?>
-   							<?php foreach($fieldNames[0] as $innerFieldNames => $innerFieldvalues){  ?>       
-	                    	<th><?php echo ($innerFieldNames); ?> </th>
-	                    	<?php } ?>
                     <?php }else{ ?>
                         <th><?php echo ($fieldNames); ?></th>   
                     <?php } ?>
                 <?php } ?>
-                <?php foreach($results[$tableName][0][0] as $fieldNames => $values){ ?> 
-				<?php if($fieldNames == "Location"){ ?>
-						<th style="width:100px;"><?php echo ($fieldNames); ?> </th>
-						<?php }else{ ?>
-								<th><?php echo ($fieldNames); ?></th>   
-						<?php } ?>
-				<?php } ?>
             </tr>
             <?php foreach($results[$tableName] as $result){ ?>
                 <tr>
-                    <?php foreach($result[$tableName] as $values){ ?>
-	                    	<td><?php echo ($values); ?></td>
-                    <?php } ?>
-                    <?php foreach($result[0] as $values){ ?>
-	                    	<td><?php echo ($values); ?></td>
+                    <?php foreach($result[$tableName] as $values){ ?> 
+                    <td><?php echo ($values); ?></td>   
                     <?php } ?>
                 </tr>
             <?php } ?>
@@ -114,7 +129,7 @@ foreach($searchTablesArray as $tableName) { ?>
 <?php 
 $iterator++;
 } ?>
-  </div>
+    </div>
 </div>
 <script>
     $( document ).ready(function() { 
@@ -143,4 +158,5 @@ $iterator++;
 </script>    
     
 <?php } ?>
+
 </div>
