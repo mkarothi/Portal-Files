@@ -23,13 +23,20 @@
     <title>
         PETS
     </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php
     echo $this->Html->meta('icon');
     echo $this->Html->css('portal_style');
     echo $this->Html->css('body_style');
     echo $this->Html->css('report_style');
     // echo $this->Html->css('search_style');
-    echo $this->Html->script('jquery/jquery-latest.min.js');
+    if($this->action == 'paritycheck'){?>
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <?php }else{ 
+	    echo $this->Html->script('jquery/jquery-latest.min.js');
+    }
     echo $this->Html->script('jquery/right-menu.js');
     ?>
 </head>

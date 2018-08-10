@@ -7,7 +7,7 @@ class ReportsController extends AppController {
     
     function beforeFilter() {
         parent::beforeFilter();
-        Configure::write('debug', 2);
+        Configure::write('debug', 0);
         ini_set('memory_limit', '3092M');
         $this->layout = "report";
     }
