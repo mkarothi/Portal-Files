@@ -1,0 +1,440 @@
+/*
+CSS Credit: Portal Sytelsheets
+*/
+
+body {
+	margin: 0;
+	padding: 0;
+	line-height: 1.5em;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #333333;
+	background: #FFFFFF;
+}
+
+a:link, a:visited { color: #000; text-decoration: none;} 
+a:active, a:hover { color: #F00; text-decoration: underline}
+
+h1 {
+	margin: 0px;
+	padding: 3px 0px 15px 0px;
+	font-size: 24px;
+	font-weight: bold;
+	color: #333333;
+}
+
+h2 {
+	margin: 0px;
+	padding: 0px 0px 5px 0px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #3e78b2;
+}
+
+h4 {
+	margin: 0px;
+	padding: 0px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #06A;
+}
+
+p{
+	margin: 0px;
+	padding: 0 0 10px 0;
+	text-align: justify;
+}
+
+.spacetobottom {
+	clear: both;
+	height: 50px;
+}
+
+.spacetoright {
+	float: left;
+	width: 10px;
+	height: 1px;
+}
+
+/* ----- Form ----- */
+form {
+	margin: 35px 0 0 0;
+	padding: 0px;
+	/* text-align: right; */	
+}
+
+label {
+	margin: 0 10px;
+}
+
+.button{
+	margin: 0px;
+	width: 50px;
+	height: 20px;
+	border: 0px;
+	color: #333333;
+	font-weight: bold;
+	background: #FFFFFF;
+	cursor: pointer;
+}
+/* End of Form */
+
+.more_button a {
+	clear: both;
+	display: block;
+	width: 100px;
+	height: 18px;
+	margin: 0px;
+	padding: 2px;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	color: #FFF;
+	background: #79b5f3;
+	border: 1px solid #FFF;
+	border-radius:10px;
+	
+}
+
+
+#portal_container {
+	margin: auto;
+	width: 950px;
+	padding: 0px 10px;
+	background: url(/images/mainBG.gif) repeat-y;
+}
+
+#portal_topbar {
+	float: left;
+	height: 36px;
+	width: 850px;
+	padding: 0 50px;
+	margin-bottom: 10px;	
+}
+
+#languagebox {
+	float: right;
+	padding-bottom: 5px;
+	padding-right: 5px;
+	background: #848688;
+	border-left: 1px #bcbcbc solid;	
+	border-right: 1px #bcbcbc solid;	
+	border-bottom: 1px #bcbcbc solid;
+}
+
+#languagebox img{
+	float: left;
+	border: 1px solid #FFFFFF;
+	margin-left: 5px;
+	margin-top: -1px;
+}
+
+#portal_header {
+	float: left;
+	height: 69px;
+	width: 950px;
+	margin-bottom: 1px;
+	position: relative;
+}
+
+#portal_logo {
+	float: left;
+	height: 61px;
+	width: 300px;
+	padding: 0px 50px;
+	padding-bottom: 5px;
+}
+
+.login-form{
+    margin: 35px 0 0;
+    padding: 0;
+    text-align: right;
+}
+
+#portal_logo img {
+	float: left;
+	border: none;
+	padding-right: 10px;
+}
+
+#portal_sitetitle {
+	padding: 28px 0 0 40px;
+	font-size: 1.750em;
+	font-weight: bold;
+	color: #00BFFF;
+}
+
+#portal_login {
+	float: right;
+	height: 61px;
+	vertical-align:bottom;
+}
+
+/*------------- Menu ------------------*/
+#portal_menu {
+	float: left;
+	width: 950px;
+	height: 40px;
+	margin: 0;
+	padding: 0;
+	background: url(/images/menu-bg.jpg) repeat-x;
+}
+
+#portal_menu ul {
+	margin: 0 0 0 50px;
+	padding: 0px;
+	list-style: none;
+}
+
+#portal_menu ul li{
+	display: inline;
+}
+
+#portal_menu ul li a{
+	float: left;
+	width: 140px;
+	height: 20px;
+	margin-top: 10px;
+	padding: 0;
+	font-size: 1.1em;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	color: #00BFFF;
+	border-left: 1px solid #3399FF;
+}
+
+#portal_menu ul li .lastmenu{
+	border-right: 1px solid #3399FF;	
+}
+
+#portal_menu li a:hover, #portal_menu li .current{
+	color: #000000;
+	background: url(/images/menuhoverBG.gif) no-repeat;
+}
+/* ----------------- end of menu----------------*/
+
+#portal_banner {
+	clear: both;
+	float: left;
+	height: 150px;
+	padding: 0px 10px 0px 35px;
+	margin-bottom: -18px;
+	background: url(/images/bannerBG.gif) no-repeat;
+	*float: none;
+}
+
+#portal_banner h2 {
+	font-size: 2.1em;
+	padding: 15px 0px 10px;
+}
+
+#portal_banner p {
+	margin-bottom: 1px;
+	padding: 2px 15px 7px 0px;
+}
+
+.portal_services {
+	clear: both;
+	float: left;
+	padding-left: 30px;
+	margin-bottom: 25px;
+}
+
+.portal_services h2 {
+	font: bold 17px Arial,Helvetica,sans-serif;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.portal_services a {
+	margin-bottom: 5px;
+}
+
+
+.service_box {
+	float: left;
+	width: 170px;
+	height:225px;
+	text-align: center;
+	padding: 10px 15px 10px 15px;
+	margin-right: 25px;
+	background: url(/images/boxBG.png) no-repeat;
+	border-radius:20px;
+}
+
+.service_box p {
+	padding-bottom: 5px;
+}
+
+.service_box img{
+	padding-bottom: 2px;
+	
+}
+
+.service_box  {
+	padding-bottom: 5px;
+}
+
+.portal_fullgraybox {
+	clear: both;
+	float: left;
+	width: 798px;
+	padding: 25px;
+	margin: 50px 50px 25px 50px;
+	border: 1px solid #CCCCCC
+}
+
+* html .portal_fullgraybox {
+	clear: both;
+	float: left;
+	width: 798px;
+	padding: 25px;
+	margin: 50px 50px 25px 25px;
+	border: 1px solid #CCCCCC
+}
+
+.portal_fullgraybox img{
+	float: left;
+	margin: 3px 20px 0 0px;
+	border: 1px solid #999999;
+}
+
+.portal_fullgraybox ul {
+	margin: 10px 0 0 0px;
+	padding: 0 0 0 30px;
+}
+
+.portal_fullgraybox li {
+	list-style: inside;
+	padding: 0 0 10px 0;
+	background: url(/images/listicon.gif) center left no-repeat;
+}
+
+/* news section */
+
+#portal_newssection {
+	clear: both;
+	float: left;
+	width: 900px;
+	margin: 0 0 25px 50px;
+}
+
+* html #portal_newssection {
+	clear: both;
+	float: left;
+	width: 900px;
+	margin: 0 0 25px 25px;
+}
+
+.newsbox {
+	float: left;
+	width: 250px;
+	margin-right: 50px;
+}
+
+
+/* end of news section */
+
+/* Light Blue Row */
+#portal_light_blue_row {
+	clear: both;
+	float: left;	
+	width: 100%;
+	padding: 25px 0 25px 0px;
+	background: #8dc3fa;
+	border-top: 5px solid #98cafc;
+}
+
+#portal_light_blue_row ul{
+	padding-left: 33px;
+}
+
+#portal_light_blue_row th{
+	padding-left: 13px;
+}
+
+.portal_gallery {
+	float: left;
+	width: 400px;
+	margin-right: 50px;
+}
+
+.portal_partners {
+	float: left;
+	width: 400px;
+}
+
+.gp_row {
+	width: 400px;
+	margin-bottom: 10px;
+}
+
+.gp_row img{
+	float: left;
+	margin: 3px 10px 0 0;
+	border: 1px solid #333333;
+}
+
+.gp_row p{
+	color: #000000;
+}
+
+#content_resize { padding:20px 0 24px 40px; width:870px; background: no-repeat scroll 0 0 rgba(0, 0, 0, 0); }
+#content_resize .mainbar { float:left; width:580px;}
+#content_resize .mainbar img { margin:0 12px 24px 0; padding:4px; border:1px solid #b7b7b7; background-color:#fff;}
+#content_resize .mainbar img.fl { float:left; margin-right:12px;}
+#content_resize .mainbar .article, .content .sidebar .gadget { margin:0; padding:0 0 10px 0;}
+#content_resize .sidebar { float:right; width:225px;}
+
+/* end of Light Blue Row */
+
+/* ----- Footer ----- */
+
+#portal_footer {
+	clear: both;
+	padding: 15px 0px 0px 0px;
+	width: 950px;
+	height: 50px;
+	text-align: center;
+	background: #999999;
+	border-top: 5px solid #666666;
+}
+
+#portal_footer a{
+	font-weight: normal;
+}
+
+/* ----- End of Footer ----- */
+
+.bulksearch-link{
+	padding: 0 6px;
+}
+
+.success-message{
+	font-size: 15px;
+	font-weight: bold;
+	color: #FF0000;
+}
+
+/* SURVEY PAGE */
+.surveycontainer { clear: both; 	width:100%; padding: 15px 0px 0px 0px;}
+.surveyol{	list-style-type:decimal !important;}
+.surveycontainer div.input{float: left;
+    width: 100%;
+    padding: 10px 0 0 0;}
+.fl {float:left;}
+.fr {float:right;}
+.surveycontainer label {
+	margin: 0 0px;
+}
+
+.mtop5 {
+    margin-top: 5px;
+}
+
+.mtop10 {
+    margin-top: 10px;
+}
