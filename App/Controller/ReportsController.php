@@ -7,7 +7,7 @@ class ReportsController extends AppController {
     
     function beforeFilter() {
         parent::beforeFilter();
-        Configure::write('debug', 0);
+        Configure::write('debug', 2);
         ini_set('memory_limit', '3092M');
         $this->layout = "report";
     }
@@ -22,6 +22,30 @@ class ReportsController extends AppController {
             $this->autoRender = FALSE;
         }else{
             $this->render("tqhealth");
+        }
+    }
+    
+	/*
+	CREATE TABLE IF NOT EXISTS `tq_os_exception_datas` (
+	  `Server_Name` varchar(255) NOT NULL,
+	  `TQ_Last_Collection_Time` varchar(255) NOT NULL,
+	  `Time_since_Last_Collection` varchar(255) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	 
+	CREATE TABLE IF NOT EXISTS `tq_vmware_exception_datas` (
+	  `Server_Name` varchar(255) NOT NULL,
+	  `TQ_Last_Collection_Time` varchar(255) NOT NULL,
+	  `Time_since_Last_Collection` varchar(255) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	 * 
+	 * 
+	 * */
+    function tqexception($fromTable = "global", $reportType = false){
+		$this->__search($fromTable, $reportType, 'tqexception'); 
+		if(isset($this->data["Reports"]["export"]) && $this->data["Reports"]["export"] == "export"){
+            $this->autoRender = FALSE;
+        }else{
+            $this->render("tqexception");
         }
 	}
 		
@@ -96,6 +120,9 @@ class ReportsController extends AppController {
 		if ($searchName == 'tqhealth'){
 			$searchTablesArray = array("TqVmwareHealthcheckData", "TqLinuxHealthcheckData"); 
 			$searchTypes = array("TqLinuxHealthcheckData" => "tqhealth", "TqVmwareHealthcheckData" => 'tqhealth');
+		}elseif ($searchName == 'tqexception'){
+			$searchTablesArray = array("TqOsExceptionData", "TqVmwareExceptionData"); 
+			$searchTypes = array("TqOsExceptionData" => "tqos", "TqVmwareExceptionData" => 'tqvmware');
 		}elseif($searchName == 'serverinventory'){
             if($fromTable == "global"){
                 $searchTablesArray = array("CmdbServerData", "RvtoolsServerData", "HmcScansServerData", 'TadamSysidComponentsData');
@@ -188,7 +215,7 @@ class ReportsController extends AppController {
         }
         
         foreach($searchTablesArray as $tableName) {
-            
+        	
             if(isset($this->data) && !empty($this->data)){
                 $this->loadModel($tableName);
                 if($reportType == 'tqhost'){
@@ -841,6 +868,11 @@ class ReportsController extends AppController {
                 $this->loadModel("$tableName");
                 $options['limit'] = 100;
                 $results[$tableName] =  $this->$tableName->find("all", $options);
+                $this->set("fromSearch", 1);
+			}elseif($searchName == 'tqexception'){
+                $this->loadModel("$tableName");
+                $options['limit'] = 100;
+                $results[$tableName] =  $this->$tableName->find("all", $options);
                 $this->set("fromSearch", 1);                
             }else{
                 $this->set("fromSearch", 0);
@@ -1233,7 +1265,7 @@ class ReportsController extends AppController {
     // // Miscellaneous glyphs, UTF-8
     // $objPHPExcel->setActiveSheetIndex(0)
                 // ->setCellValue('A4', 'Miscellaneous glyphs')
-                // ->setCellValue('A5', 'Ã©Ã Ã¨Ã¹Ã¢ÃªÃ®Ã´Ã»Ã«Ã¯Ã¼Ã¿Ã¤Ã¶Ã¼Ã§');
+                // ->setCellValue('A5', 'éàèùâêîôûëïüÿäöüç');
     // 
     // // Rename worksheet
     // $objPHPExcel->getActiveSheet()->setTitle('Simple');
@@ -1243,7 +1275,7 @@ class ReportsController extends AppController {
     $objPHPExcel->setActiveSheetIndex(0);
     
     
-    // Redirect output to a clientâ€™s web browser (Excel2007)
+    // Redirect output to a client’s web browser (Excel2007)
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     header('Content-Disposition: attachment;filename="01simple.csvx"');
     header('Cache-Control: max-age=0');
