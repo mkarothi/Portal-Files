@@ -12,6 +12,8 @@
     <?php // debug($this->request->params['action']);?>
     <div id="navcontainer">
       <ul id="navlist">
+      	<li <?php if($this->request->params['action'] == 'tqexception'){?>class="active" <?php }?> ><a href="/reports/global/tqexception/" <?php if($this->request->params['action'] == 'tqexception'){?>class="current" <?php }?>>TQ Exception</a></li>
+      	
 		<li <?php if($this->request->params['action'] == 'tqhealth'){?>class="active" <?php }?> ><a href="/reports/global/tqhealth/" <?php if($this->request->params['action'] == 'tqhealth'){?>class="current" <?php }?>>TQ Check</a></li>
 		
         <li <?php if(in_array($this->request->params['action'],array('pingnslookup', 'serverinventory')) ){?>class="active" <?php }?> ><a href="/reports/tadam/serverinventory" <?php if(in_array($this->request->params['action'],array('pingnslookup', 'serverinventory'))){?>class="current" <?php }?>>Server Inventory</a></li>
