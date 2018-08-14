@@ -1,39 +1,120 @@
+my $name = <STDIN>;  --> perl
+myName = input() --> python
 
---
--- Table structure for table `sn_server_parity_datas`
---
+sub subfunction($) { }  --> perl
+def subfunction(inputstring):  --> python 
 
-DROP TABLE IF EXISTS `sn_server_parity_datas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sn_server_parity_datas` (
-  `Server_Name` varchar(100) NOT NULL,
-  `App_Names` varchar(100) DEFAULT NULL,
-  `Operating_System` varchar(100) DEFAULT NULL,
-  `OS_Version` varchar(100) DEFAULT NULL,
-  `IPAddress` varchar(100) DEFAULT NULL,
-  `Logical_CPU_Count` varchar(100) DEFAULT NULL,
-  `CPU_Speed` varchar(100) DEFAULT NULL,
-  `Memory_Size_MB` varchar(100) DEFAULT NULL,
-  `Model` varchar(100) DEFAULT NULL,
-  `Manufacturer` varchar(100) DEFAULT NULL,
-  `Power_Rating` int(100) DEFAULT NULL,
-  PRIMARY KEY (`Server_Name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+print('You name has ' + str(len(name)) + ' letters in it')
 
+for i in range(5,50,5):  # equal to i = 5, i< 50, i+=5 not included
+    print('the value is :' , i)
 
+value = random.randint(1,100)
+print('random value is :', value)
 
-DROP TABLE IF EXISTS `mapping_tables`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mapping_tables` (
-  `Source_Server_Name` varchar(80) DEFAULT NULL,
-  `Source_Server_Env` varchar(20) DEFAULT NULL,
-  `Target_Server_Name` varchar(80) DEFAULT NULL,
-  `Target_Server_Env` varchar(20) DEFAULT NULL,
-  `SYS_ID` varchar(200) DEFAULT NULL,
-  `Server_Function` varchar(200) DEFAULT NULL,
-  `Primary_SW` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+colors = ['red', 'blue', 'green', 4, 5]
+array=list('hello')  # ['h', 'e', 'l', 'l', 'o']
 
+list1 = ['A','B','C'] and list2 = [10,20,30].
+zip(list1, list2) # results in a list of tuples say [('A',10),('B',20),('C',30)]
 
+SList = sorted(listOne) ## sorts the elements in order
+SList = listOne.sort(key=str.lower)
+RList = reversed(listOne)  ## to Reverse elements in the lsit
+UList = list(set(listOne))  ## to remove duplicates from a list
+
+emp ={'murthy' : 40, 'Rama': 42, 'Venkat': 50} ## key : value pairs
+## To display key value pairs
+for key, value in emp.items():
+    print('Key : ' , key , ' and Values is :' , value)
+
+if 'Mohan' not in emp:
+    emp['Mohan'] = 38
+	
+','.join(['cats','rats','bulls'])  ## joins the list items with , (the join string)
+'#'.join(['cats','rats','bulls']) ## joins the list items with # (the join string)
+str='My Name is KSN Murthy'
+print(str.split())  # split by default with space
+print(str.split('is')) # split by dlimeter'is' word
+splitArray = str.split()
+
+str.replace('abc','xyz')  ## replaces every abc to xyz
+
+phoneNumRegEx = re.compile(r'(\d\d\d)-(\d\d\d)-(\d\d\d\d)') 
+
+phoneRegEx = re.compile(r'''
+## 234-456-7890 or (234) -456-7890 or 456-7890  ext 12345 or x12345
+(                           # to parse properly for findall touples output
+((\d\d\d)|(\(\d\d\d\)))?    # area code group
+(\s|-)                      # first separator
+\d\d\d                      # first 3 digits
+(\s|-)                      # second separator
+\d\d\d\d                    # last 4 digits
+(((ext (\.)?\s)|x)          # extension word optional
+ (\d{2,5}))?                # extension number-part optional this line and above line are combined with ()
+ )
+''', re.VERBOSE)
+
+emailRegEx = re.compile(r'''
+## some._+thing@abc.command
+[a-zA-Z0-9_.+]+    # name part
+@                  # @ symbol
+[a-zA-Z0-9_.+]+    # domain part
+''', re.VERBOSE)
+
+os.getcwd()
+os.chdir('C:\\Python')
+-------------------------------------------------------------------------------
+FILE IO:-
+inputFile = open('C:\\Python\\Learning-Scripts\InputForPHone-Email-RegExProgram.csv')  # default read mode
+#inputFile.read()
+for line in inputFile:
+    line = line.strip('\n')
+    print(line)
+inputFile.close()
+
+outputFile = open('C:\\Python\\Learning-Scripts\OuptutFile.txt', 'w')  # default write mode, 'a' for append mode
+outputFile.write('Hello, this is a test message \n')
+outputFile.write('have a great day ahead \n')
+outputFile.close()
+
+recursive search:-
+for folderName, subfolders, filenames in os.walk('C:\\Python\\Learning-Scripts'):  ## this goes recursive walk to folder and sub folders
+    print('the folder is :' + folderName)
+    print('the subfolders in :' + folderName + 'are :' + str(subfolders))  ## subfolders is a list of entries
+    print('the files in :' + folderName + 'are :' + str(filenames))  ## filenames is a list of entries
+    print()
+	
+-----------------------------------------------------------------------------------------------------------
+REST API
+import requests
+from requests.auth import HTTPDigestAuth
+import json
+
+url = "http://api_url"
+myResponse = requests.get(url,auth=HTTPDigestAuth(raw_input("username: "), raw_input("Password: ")), verify=True)
+if(myResponse.ok):
+	jData = json.loads(myResponse.content)
+
+    print("The response contains {0} properties".format(len(jData)))
+    print("\n")
+    for key in jData:
+        print key + " : " + jData[key]
+else:
+  # If response code is not ok (200), print the resulting http error code with description
+    myResponse.raise_for_status()
+	---------------------------------------------------------------------------------------------------
+DB Connection:-	
+import MySQLdb
+    #establish a connection to the database.
+db = MySQLdb.connect(“host”=”local host”, “database-user”=”user-name”, “password”=”password”, “database-name”=”database”)
+    #initialize the cursor variable upon the established connection:
+c1 = db.cursor()
+    #retrieve the information by defining a required query string.
+sql = “Select * from dept”
+    #fetch the data using fetch() methods and print it.
+data = c1.fetch(sql)
+    #close the database connection.
+db.close()
+
+retcode = subprocess.call(["C:/Perl64/bin/perl.exe" , "C:/Portal-Scripts/TQHealthCheck/updateTQTable.pl", currDir])
